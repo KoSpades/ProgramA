@@ -8,5 +8,7 @@ payload = {"subject": "programA", "object": "fileA", "action": "read"}
 r_root = requests.get('http://127.0.0.1:8000/').json()
 print(r_root)
 
-r = requests.post('http://127.0.0.1:8000/check', json=payload)
-print(r.json())
+r_check = requests.post('http://127.0.0.1:8000/check', json=payload)
+print(r_check.json())
+print(r_check.status_code)
+
