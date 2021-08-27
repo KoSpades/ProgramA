@@ -23,9 +23,16 @@ token_str = token_json["token_type"] + " " + token_json["access_token"]
 
 # Making a get request to read file A
 headers = {"Authorization": token_str}
-r_file = requests.get('http://127.0.0.1:8000/fileA', headers=headers)
+r_file = requests.get('http://127.0.0.1:8000/fileA/read', headers=headers)
 print(r_file.json())
 print(r_file.status_code)
+
+# Making a get request to write file A (which should fail)
+headers = {"Authorization": token_str}
+r_file = requests.get('http://127.0.0.1:8000/fileA/write', headers=headers)
+print(r_file.json())
+print(r_file.status_code)
+
 
 
 
