@@ -14,6 +14,7 @@ payload = {"subject": "programA", "object": "fileA", "action": "read"}
 # Making a post request (posting the intent) to get a token
 r_check = requests.post('http://127.0.0.1:8000/token', json=payload)
 token_json = r_check.json()
+# print(token_json)
 
 # Note that after we get the token, we have to put in the right format as a string.
 # This string will be used in the headers of our subsequent file access requests.
@@ -23,13 +24,13 @@ token_str = token_json["token_type"] + " " + token_json["access_token"]
 
 # Making a get request to read file A
 headers = {"Authorization": token_str}
-r_file = requests.get('http://127.0.0.1:8000/fileA/read', headers=headers)
+r_file = requests.get('http://127.0.0.1:8000/resource?file=fileA&action=read', headers=headers)
 print(r_file.text)
 # print(r_file.status_code)
 
 # Making a get request to write file A (which should fail)
 headers = {"Authorization": token_str}
-r_file = requests.get('http://127.0.0.1:8000/fileA/write', headers=headers)
+r_file = requests.get('http://127.0.0.1:8000/resource?file=fileA&action=write', headers=headers)
 print(r_file.text)
 # print(r_file.status_code)
 
